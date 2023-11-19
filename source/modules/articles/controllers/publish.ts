@@ -4,8 +4,8 @@ import { ArticlesTable } from "../model";
 
 export async function publishArticle(request: any, response: Response, next: NextFunction) {
 	try {
-		const unacceptableStatus = Object.values(ARTICLE_STATUS).indexOf(request.body.status) >= 0;
-		if (request.body.status === undefined || !unacceptableStatus) {
+		const unacceptableStatus = Object.values(ARTICLE_STATUS).indexOf(request.body.status) < 0;
+		if (request.body.status === undefined || unacceptableStatus) {
 			next(new Error(ERRORS.BAD_REQUEST));
 		}
 

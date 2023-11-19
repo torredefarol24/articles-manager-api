@@ -14,32 +14,39 @@ export function handleResponse(
 		});
 	} else {
 		console.error(`${request.method} ${request.originalUrl} ${succOrErr.toString()}`);
-		let code,
-			errorMessage,
+
+		let code = 500,
+			errorMessage = "Something went wrong",
 			errStr = succOrErr.toString();
 
-		switch (errStr) {
-			case errStr.includes(ERRORS.TOKEN_MISSING):
-				errorMessage = "Token is required";
-				code = 401;
-			case errStr.includes(ERRORS.UNAUTHORIZED):
-				errorMessage = "UnAuthorized";
-				code = 401;
-			case errStr.includes("FOREIGN KEY (`ownerId`) REFERENCES `users`"):
-				errorMessage = "User doesn't exist";
-				code = 404;
-			case errStr.includes(ERRORS.ARTICLE_NOT_FOUND):
-				errorMessage = "Article doesn't exist";
-				code = 404;
-			case errStr.includes(ERRORS.BAD_REQUEST):
-				errorMessage = "Invalid request body";
-				code = 400;
-			case errStr.includes(ERRORS.ARTICLE_NOT_YOURS):
-				errorMessage = "You can't edit this article";
-				code = 401;
-			default:
-				code = 500;
-				errorMessage = "Something went down";
+		if (errStr.includes(ERRORS.TOKEN_MISSING)) {
+			errorMessage = "Token is required";
+			code = 401;
+		}
+
+		if (errStr.includes(ERRORS.UNAUTHORIZED)) {
+			errorMessage = "UnAuthorized";
+			code = 401;
+		}
+
+		if (errStr.includes("FOREIGN KEY (`ownerId`) REFERENCES `users`")) {
+			errorMessage = "User doesn't exist";
+			code = 404;
+		}
+
+		if (errStr.includes(ERRORS.ARTICLE_NOT_FOUND)) {
+			errorMessage = "Article not found";
+			code = 404;
+		}
+
+		if (errStr.includes(ERRORS.BAD_REQUEST)) {
+			errorMessage = "Bad Request";
+			code = 400;
+		}
+
+		if (errStr.includes(ERRORS.ARTICLE_NOT_YOURS)) {
+			errorMessage = "You can't edit this article";
+			code = 401;
 		}
 
 		return response.status(code).json({
