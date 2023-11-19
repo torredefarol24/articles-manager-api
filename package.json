@@ -1,0 +1,40 @@
+{
+	"name": "articles-api",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"dependencies": {
+		"@types/body-parser": "^1.19.5",
+		"@types/cors": "^2.8.16",
+		"@types/dotenv": "^8.2.0",
+		"@types/express": "^4.17.21",
+		"@types/jsonwebtoken": "^9.0.5",
+		"@types/node": "^20.9.0",
+		"@types/sequelize": "^4.28.18",
+		"body-parser": "^1.20.2",
+		"cors": "^2.8.5",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^9.0.2",
+		"mysql2": "^3.6.3",
+		"sequelize": "^6.35.0"
+	},
+	"devDependencies": {
+		"@types/chai": "^4.3.10",
+		"@types/chai-http": "^4.2.0",
+		"@types/mocha": "^10.0.4",
+		"chai": "^4.3.10",
+		"chai-http": "^4.4.0",
+		"mocha": "^10.2.0",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.2.2"
+	},
+	"scripts": {
+		"postinstall": "tsc ",
+		"start": "node build/server.js",
+		"setup-env-vars": "cp .env.example .env",
+		"watch-ts": " tsc -w",
+		"start-dev": "nodemon build/server.js",
+		"test": "mocha --require ts-node/register source/**/*.spec.ts --exit"
+	}
+}
