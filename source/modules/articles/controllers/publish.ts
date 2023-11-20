@@ -23,7 +23,9 @@ export async function publishArticle(request: any, response: Response, next: Nex
 					code: 200,
 					message: "Article status changed",
 					data: {
-						articleId: request.params.articleId,
+						article: {
+							articleId: parseInt(request.params.articleId),
+						},
 					},
 			  })
 			: next(new Error(ERRORS.ARTICLE_NOT_FOUND));
