@@ -15,6 +15,7 @@ export class ArticlesManager {
 		this.connectToDB();
 		this.integrateMiddleware(this.api);
 		this.integrateRoutes(this.api);
+		this.runScheduledTask();
 		this.listen();
 	}
 
@@ -51,5 +52,9 @@ export class ArticlesManager {
 		} catch (err: any) {
 			console.log("Database Connection failed", err);
 		}
+	}
+
+	private runScheduledTask(){
+
 	}
 }

@@ -26,7 +26,9 @@ export async function updateArticle(request: any, response: Response, next: Next
 			code: 200,
 			message: "Article edited",
 			data: {
-				articleId: request.params.articleId,
+				article: {
+					articleId: parseInt(request.params.articleId),
+				},
 			},
 		});
 	} catch (err) {
