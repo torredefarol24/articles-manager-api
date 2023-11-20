@@ -14,5 +14,6 @@ export enum ERRORS {
 	TOKEN_MISSING = "Token Missing",
 	ARTICLE_NOT_FOUND = "Article not found",
 	ARTICLE_NOT_YOURS = "Article not yours",
-	UNAUTHORIZED = "UnAuthorized"
+	UNAUTHORIZED = "UnAuthorized",
+	ARTICLE_UNDER_REVIEW = "Article not published"
 }

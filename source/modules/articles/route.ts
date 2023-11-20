@@ -4,6 +4,7 @@ import { checkParamsIds, checkUserType, verifyToken } from "../../utils/middlewa
 import { createArticle } from "./controllers/create";
 import { deleteArticle } from "./controllers/delete";
 import { getAll } from "./controllers/get";
+import { getArticleById } from "./controllers/getById";
 import { publishArticle } from "./controllers/publish";
 import { updateArticle } from "./controllers/update";
 
@@ -11,6 +12,7 @@ const router = Router();
 
 router.post("/", verifyToken(), createArticle);
 router.get("/", verifyToken(), getAll);
+router.get("/:articleId", [verifyToken(), checkParamsIds(["articleId"])], getArticleById);
 router.put(
 	"/:articleId",
 	[verifyToken(), checkParamsIds(["articleId"]), checkUserType(USER_TYPES.ADMIN)],
@@ -21,11 +23,7 @@ router.patch(
 	[verifyToken(), checkParamsIds(["articleId"]), checkUserType(USER_TYPES.CONTENT_CREATOR)],
 	updateArticle
 );
-router.delete(
-	"/:articleId",
-	[verifyToken(), checkParamsIds(["articleId"]), checkUserType(USER_TYPES.ADMIN)],
-	deleteArticle
-);
+router.delete("/:articleId", [verifyToken(), checkParamsIds(["articleId"])], deleteArticle);
 
 export const articleRoutes = {
 	router,

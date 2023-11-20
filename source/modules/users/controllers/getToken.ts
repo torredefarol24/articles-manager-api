@@ -10,7 +10,7 @@ export async function getToken(request: any, response: any, next: NextFunction) 
 			next(new Error(ERRORS.BAD_REQUEST));
 		}
 
-		const user = await UserTable.findOne({
+		const user: any = await UserTable.findOne({
 			where: {
 				type: request.query.tokenFor,
 			},
@@ -23,6 +23,7 @@ export async function getToken(request: any, response: any, next: NextFunction) 
 			data: {
 				token,
 				tokenFor,
+				userId: user.userId,
 			},
 		});
 	} catch (err) {

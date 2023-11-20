@@ -1,6 +1,9 @@
 import { NextFunction, Response } from "express";
 import { ERRORS } from "../config/enums";
 
+/**
+ * Central Error Handler, Response handler
+ */
 export function handleResponse(
 	succOrErr: any,
 	request: any,
@@ -21,6 +24,11 @@ export function handleResponse(
 
 		if (errStr.includes(ERRORS.TOKEN_MISSING)) {
 			errorMessage = "Token is required";
+			code = 401;
+		}
+
+		if (errStr.includes(ERRORS.ARTICLE_UNDER_REVIEW)) {
+			errorMessage = "This article isn't published";
 			code = 401;
 		}
 
